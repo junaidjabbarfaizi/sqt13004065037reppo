@@ -10,15 +10,17 @@ class BST:
         self.root = None
 
     def find_recursive(self, node, key):
-        if None == node or key == node.key:
-            return node
+        if None == node:
+            return None,None
+        elif key == node.key:
+            return node,key
         elif key < node.key:
             return self.find_recursive(node.left, key)
         else:
             return self.find_recursive(node.right, key)
     def search(self, key):
-       
-        return self.find_recursive(self.root, key)
+        node,_=self.find_recursive(self.root, key)
+        return node
     def insert(self, key):
 
         if None == self.root:
@@ -143,4 +145,17 @@ while(1):
 	else:
 	    print"Not Empty"
     elif(choice==8):
-	exit(1)
+	break
+    
+import unittest
+
+class TestBST(unittest.TestCase):
+    def test_insertion(self):
+        self.BST=BST()  
+        for i in range(0,10):
+            self.BST.insert(i)
+        for i in range(0,10):
+            node,key=self.BST.find_recursive(self.BST.root,i)
+            self.assertEqual(key,i)
+
+if __name__ == '__main__': unittest.main()   
