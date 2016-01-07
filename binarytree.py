@@ -157,5 +157,14 @@ class TestBST(unittest.TestCase):
         for i in range(0,10):
             node,key=self.BST.find_recursive(self.BST.root,i)
             self.assertEqual(key,i)
+    def test_delete(self):
+        self.BST=BST()  
+        for i in range(0,10):
+	    self.BST.insert(i)
+	    node,key=self.BST.find_recursive(self.BST.root,i)
+	    self.assertEqual(key, i)
+            self.BST.delete(i)
+	    node,key=self.BST.find_recursive(self.BST.root,i)
+            self.assertEqual(key, None)
 
 if __name__ == '__main__': unittest.main()   
